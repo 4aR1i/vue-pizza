@@ -1,30 +1,54 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+  <div class="pizza">
+    <div class="pizza__wrapper">
+      <PizzasHeader />
+      <router-view></router-view>
+    </div>
+  </div>
 </template>
 
+<script lang="ts">
+import { defineComponent } from 'vue';
+import { mapActions } from 'vuex';
+import PizzasHeader from './components/PizzasHeader.vue';
+export default defineComponent({
+  components: {
+    PizzasHeader
+  },
+  methods: {
+    ...mapActions({
+      fetchPizzas: 'getPizzas',
+    })
+  },
+  mounted() {
+    this.fetchPizzas();
+  },
+}) 
+</script>
+
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Nunito Sans', sans-serif;
 }
 
-nav {
-  padding: 30px;
+body {
+  min-height: 100vh;
+  width: 100%;
+  background: #FFDF8C;
 }
 
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
+.pizza__wrapper {
+  background-color: #fff;
+  border-radius: 10px;
+  height: 100%;
+  margin: 50px auto;
+  min-height: 90vh;
+  width: 90vw;
+  padding: 49px 50px 96px 67px;
 }
 </style>
