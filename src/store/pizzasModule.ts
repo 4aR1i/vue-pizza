@@ -20,21 +20,22 @@ export const pizzasModule: Module<PizzasState, any> = {
   state: () => ({
     pizzas: [],
   }),
-  getters: {},
   mutations: {
     setPizzas(state, pizzas: Pizza[]): void {
       state.pizzas = pizzas;
     },
   },
   actions: {
-    async getPizzas({ commit }) {
+    async getPizzas({ commit }, categoryId) {
       try {
-        const { data } = await axios.get("https://629a1bf36f8c03a97850e492.mockapi.io/items");
+        const category = categoryId === 0 ? "" : categoryId;
+        const { data } = await axios.get(
+          `https://629a1bf36f8c03a97850e492.mockapi.io/items?category=${category}`,
+        );
         commit("setPizzas", data);
       } catch (error) {
         console.log(error);
       }
     },
   },
-  modules: {},
 };

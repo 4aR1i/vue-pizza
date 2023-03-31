@@ -1,13 +1,14 @@
 <template>
   <div class="filter__categories categories">
-    <div class={{  }} v-for="category in categories" :key="category.id" @click="changeCategory(category.id)">{{
-      category.title }}
+    <div class="category" v-bind:class="{ active: category.id === activeCategory }" v-for="category in categories"
+      :key="category.id" @click="changeCategory(category.id)">{{
+        category.title }}
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { mapMutations } from 'vuex';
+import { mapMutations, mapState } from 'vuex';
 
 export default {
   data: () => ({
@@ -16,6 +17,11 @@ export default {
   methods: {
     ...mapMutations({
       changeCategory: "changeCategory",
+    }),
+  },
+  computed: {
+    ...mapState({
+      activeCategory: (state: any) => state.pizzasFilter.category
     }),
   }
 }
@@ -40,15 +46,8 @@ export default {
   cursor: pointer;
 }
 
-.category-active {
-  padding: 16px 25px;
+.active {
   background: #282828;
-  border-radius: 30px;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 19px;
-  letter-spacing: 0.015em;
   color: #FFF;
-  cursor: pointer;
 }
 </style>

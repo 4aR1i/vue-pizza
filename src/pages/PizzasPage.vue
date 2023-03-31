@@ -35,7 +35,10 @@ export default {
   letter-spacing: 0.01em;
   color: #000000;
   margin-bottom: 35px;
+}
 
+.pizza-page__filter {
+  margin-bottom: 32px;
 }
 
 .pizza-page__pizzas {

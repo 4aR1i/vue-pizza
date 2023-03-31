@@ -66,6 +66,7 @@ export default {
   color: #000000;
   margin: 11px 0 22px;
   text-align: center;
+  height: 50px;
 }
 
 .footer {

@@ -9,7 +9,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 import PizzasHeader from './components/PizzasHeader.vue';
 export default defineComponent({
   components: {
@@ -21,7 +21,17 @@ export default defineComponent({
     })
   },
   mounted() {
-    this.fetchPizzas();
+    this.fetchPizzas('');
+  },
+  watch: {
+    activeCategory(id: number) {
+      this.fetchPizzas(id);
+    }
+  },
+  computed: {
+    ...mapState({
+      activeCategory: (state: any) => state.pizzasFilter.category
+    }),
   },
 }) 
 </script>
